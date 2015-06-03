@@ -4,6 +4,9 @@ set showmatch "括弧入力時の対応する括弧を表示
 syntax on "コードの色分け
 set tabstop=4 "インデントをスペース4つ分に設定
 set smartindent "オートインデント
+set paste
+
+autocmd FileType * setlocal formatoptions-=ro
 
 "#####検索設定#####
 set ignorecase "大文字/小文字の区別なく検索する
@@ -26,6 +29,10 @@ if has('vim_starting')
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim' "ファイルオープンを便利に
 NeoBundle 'Shougo/neomru.vim' "最近使ったファイルを表示
+" インデント見やすくする
+ NeoBundle 'nathanaelkane/vim-indent-guides'
+ " オン
+let g:indent_guides_enable_on_vim_startup = 1
 
 call neobundle#end()
 
