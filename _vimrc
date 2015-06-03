@@ -6,6 +6,7 @@ set tabstop=4 "インデントをスペース4つ分に設定
 set smartindent "オートインデント
 set paste
 
+"改行でコメントアウトしない
 autocmd FileType * setlocal formatoptions-=ro
 
 "#####検索設定#####
