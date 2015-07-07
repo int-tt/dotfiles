@@ -5,7 +5,8 @@ syntax on "コードの色分け
 set tabstop=4 "インデントをスペース4つ分に設定
 set smartindent "オートインデント
 set paste
-
+colorscheme molokai
+set t_Co=256
 "改行でコメントアウトしない
 autocmd FileType * setlocal formatoptions-=ro
 
