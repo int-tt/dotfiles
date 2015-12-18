@@ -1,21 +1,18 @@
-set number "行番号を表示する
-set title "編集中のファイル名を表示
-set showmatch "括弧入力時の対応する括弧を表示
-syntax on "コードの色分け
-set tabstop=4 "インデントをスペース4つ分に設定
-set smartindent "オートインデント
+set number 
+set title 
+set showmatch 
+syntax on 
+set tabstop=2 
+set smartindent 
 set paste
 colorscheme molokai
 set t_Co=256
-"改行でコメントアウトしない
+set laststatus=2 
 autocmd FileType * setlocal formatoptions-=ro
 
-"#####検索設定#####
-set ignorecase "大文字/小文字の区別なく検索する
-set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
-set wrapscan "検索時に最後まで行ったら最初に戻る
-
-"プラグインのセットアップ
+set ignorecase 
+set smartcase 
+set wrapscan 
 
 if has('vim_starting')
 		  set nocompatible               " Be iMproved
@@ -26,14 +23,23 @@ if has('vim_starting')
 		    " Required:
 			   call neobundle#begin(expand('~/.vim/bundle/'))
 
-" Let NeoBundle manage NeoBundle
+
 " " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/unite.vim' "ファイルオープンを便利に
-NeoBundle 'Shougo/neomru.vim' "最近使ったファイルを表示
-" インデント見やすくする
- NeoBundle 'nathanaelkane/vim-indent-guides'
- " オン
+NeoBundle 'Shougo/unite.vim' 
+NeoBundle 'Shougo/neomru.vim' 
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'vim-jp/vim-go-extra'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
+
+let g:syntastic_mode_map = { 'mode': 'passive','active_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['go', 'golint']
+
+let g:lightline = { 'colorscheme': 'wombat', }
+
 let g:indent_guides_enable_on_vim_startup = 1
 
 call neobundle#end()

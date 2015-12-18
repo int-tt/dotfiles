@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/int/development/ctf/ksn/digest'
+let g:netrw_dirhist_2='/Users/int/development/ruby/rspec_study/spec'
+let g:netrw_dirhist_3='/Users/int/development/ruby'
+let g:netrw_dirhist_4='/Users/int/Downloads'
+let g:netrw_dirhist_5='/Users/int/.config'
