@@ -34,7 +34,12 @@ NeoBundle 'vim-jp/vim-go-extra'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 
+let g:user_emmet_leader_key='<c-e>'
 let g:syntastic_mode_map = { 'mode': 'passive','active_filetypes': ['go'] }
 let g:syntastic_go_checkers = ['go', 'golint']
 
@@ -42,6 +47,9 @@ let g:lightline = { 'colorscheme': 'wombat', }
 
 let g:indent_guides_enable_on_vim_startup = 1
 
+au BufRead,BufNewFile *.md set filetype=markdown
+
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 call neobundle#end()
 
 " Required:
