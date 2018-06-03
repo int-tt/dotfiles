@@ -2,7 +2,8 @@ set number
 set title 
 set showmatch 
 syntax on 
-set tabstop=2 
+set tabstop=2
+set shiftwidth=2
 set smartindent 
 set paste
 colorscheme molokai
@@ -13,7 +14,7 @@ autocmd vimenter * NERDTre
 set ignorecase 
 set smartcase 
 set wrapscan 
-
+set expandtab
 if has('vim_starting')
 		  set nocompatible               " Be iMproved
 		    " Required:
