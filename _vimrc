@@ -1,62 +1,45 @@
-set number 
-set title 
-set showmatch 
-syntax on 
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
+" 設定開始
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  " プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイル（後述）を用意しておく
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+  " 設定終了
+  call dein#end()
+  call dein#save_state()
+endif
+
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
+
+if dein#check_install('molokai') " molokaiがインストールされていれば
+    colorscheme molokai
+endif
+
+set number
+set title
+syntax on
 set tabstop=2
-set shiftwidth=2
-set smartindent 
-set paste
-colorscheme molokai
-set t_Co=256
-set laststatus=2 
-autocmd FileType * setlocal formatoptions-=ro
-autocmd vimenter * NERDTre
-set ignorecase 
-set smartcase 
-set wrapscan 
-set expandtab
-if has('vim_starting')
-		  set nocompatible               " Be iMproved
-		    " Required:
-			   set runtimepath+=~/.vim/bundle/neobundle.vim/
-			   endif
-			
-		    " Required:
-			   call neobundle#begin(expand('~/.vim/bundle/'))
-
-
-" " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/unite.vim' 
-NeoBundle 'Shougo/neomru.vim' 
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'vim-jp/vim-go-extra'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-
-let g:user_emmet_leader_key='<c-e>'
-let g:syntastic_mode_map = { 'mode': 'passive','active_filetypes': ['go'] }
-let g:syntastic_go_checkers = ['go', 'golint']
-let g:go_version_warning = 0
-let g:lightline = { 'colorscheme': 'wombat', }
-
-let g:indent_guides_enable_on_vim_startup = 1
-
-map <C-n> :NERDTreeToggle<CR>
-au BufRead,BufNewFile *.md set filetype=markdown
-
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
