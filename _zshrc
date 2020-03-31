@@ -15,7 +15,7 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 
-PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~%$ $"
+#PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~%$ $"
 #%# "
 
 
@@ -46,11 +46,11 @@ autoload -Uz add-zsh-hook
 zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
-function _update_vcs_info_msg() {
-    LANG=en_US.UTF-8 vcs_info
-    RPROMPT="${vcs_info_msg_0_}"
-}
-add-zsh-hook precmd _update_vcs_info_msg
+#function _update_vcs_info_msg() {
+#    LANG=en_US.UTF-8 vcs_info
+#    RPROMPT="${vcs_info_msg_0_}"
+#}
+#add-zsh-hook precmd _update_vcs_info_msg
 
 
 ########################################
@@ -182,6 +182,33 @@ compdef _powered_cd powered_cd
 
 [ -e ~/.powered_cd.log ] || touch ~/.powered_cd.log
 
+
+
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
+
+
+# if the init script doesn't exist
+if ! zgen saved; then
+
+  # specify plugins here
+  zgen oh-my-zsh
+
+  # generate the init script from plugins above
+  zgen save
+fi
+
+zgen load caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+BULLETTRAIN_PROMPT_ORDER=(
+  time
+  dir
+  git
+)
+BULLETTRAIN_PROMPT_ADD_NEWLINE="false"
+BULLETTRAIN_PROMPT_SEPARATE_LINE="false"
+BULLETTRAIN_DIR_EXTENDED=2
+BULLETTRAIN_DIR_BG=yellow
+BULLETTRAIN_DIR_FG=black
 
 #[[ -f "$(brew --prefix cda)/cda.sh" ]] && . "$(brew --prefix cda)/cda.sh"
 #[[ -f "/Users/int/development/project/cda/cda.sh" ]] && . "/Users/int/development/project/cda/cda.sh"
